@@ -1,0 +1,212 @@
+error[E0000]: something went wrong in failingFunction
+ --> test.go:66
+  = stack backtrace:
+    0: main.testBasicErrorHandling
+          at test.go:66
+    1: main.main
+          at test.go:25
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[E0001]: open /nonexistent/path/file.txt: no such file or directory
+ --> test.go:72
+  = stack backtrace:
+    0: main.testBasicErrorHandling
+          at test.go:72
+    1: main.main
+          at test.go:25
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[E0006]: user 12345 not found in database
+ --> test.go:88
+  = context:
+    user_id: 12345
+    operation: user_profile_update
+    timestamp: 1747976901
+    client_ip: 192.168.1.100
+
+  = stack backtrace:
+    0: main.testContextualErrors
+          at test.go:88
+    1: main.main
+          at test.go:28
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[E0005]: failed to load configuration file 'config.json' for user 999: invalid JSON format
+ --> test.go:101
+  = stack backtrace:
+    0: main.testCustomFormatting
+          at test.go:101
+    1: main.main
+          at test.go:31
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[E0009]: assertion failed: slice should not be empty, got length 0
+ --> test.go:137
+  = stack backtrace:
+    0: main.testAssertions
+          at test.go:137
+    1: main.main
+          at test.go:37
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[E0000]: operation failed in deferred function
+ --> test.go:170
+  = stack backtrace:
+    0: main.testTryDefer
+          at test.go:170
+    1: main.main
+          at test.go:46
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[E0000]: something went wrong in failingFunction
+ --> test.go:186
+  = stack backtrace:
+    0: main.testCheckFunction
+          at test.go:186
+    1: main.main
+          at test.go:49
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[E0001]: open nonexistent_file.txt: no such file or directory
+ --> test.go:200
+  = context:
+    filename: nonexistent_file.txt
+    operation: file_open
+
+  = stack backtrace:
+    0: main.testFileOperations
+          at test.go:200
+    1: main.main
+          at test.go:52
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[GEN000]: something went wrong in failingFunction
+ --> test.go:66
+  = stack backtrace:
+    0: main.testBasicErrorHandling
+          at test.go:66
+    1: main.main
+          at test.go:25
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[FS001]: open /nonexistent/path/file.txt: no such file or directory
+ --> test.go:72
+  = stack backtrace:
+    0: main.testBasicErrorHandling
+          at test.go:72
+    1: main.main
+          at test.go:25
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[GEN000]: user 12345 not found in database
+ --> test.go:88
+  = context:
+    user_id: 12345
+    operation: user_profile_update
+    timestamp: 1747978561
+    client_ip: 192.168.1.100
+
+  = stack backtrace:
+    0: main.testContextualErrors
+          at test.go:88
+    1: main.main
+          at test.go:28
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[GEN000]: failed to load configuration file 'config.json' for user 999: invalid JSON format
+ --> test.go:101
+  = stack backtrace:
+    0: main.testCustomFormatting
+          at test.go:101
+    1: main.main
+          at test.go:31
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[LOGIC003]: assertion failed: slice should not be empty, got length 0
+ --> test.go:137
+  = stack backtrace:
+    0: main.testAssertions
+          at test.go:137
+    1: main.main
+          at test.go:37
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[GEN000]: operation failed in deferred function
+ --> test.go:170
+  = stack backtrace:
+    0: main.testTryDefer
+          at test.go:170
+    1: main.main
+          at test.go:46
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[GEN000]: something went wrong in failingFunction
+ --> test.go:186
+  = stack backtrace:
+    0: main.testCheckFunction
+          at test.go:186
+    1: main.main
+          at test.go:49
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+
+error[FS001]: open nonexistent_file.txt: no such file or directory
+ --> test.go:200
+  = context:
+    filename: nonexistent_file.txt
+    operation: file_open
+
+  = stack backtrace:
+    0: main.testFileOperations
+          at test.go:200
+    1: main.main
+          at test.go:52
+    2: runtime.main
+          at proc.go:283
+    3: runtime.goexit
+          at asm_arm64.s:1223
+

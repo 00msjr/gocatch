@@ -1,0 +1,56 @@
+[2025-05-23 00:57:56] ERROR in test.go:67 (main.testBasicErrorHandling): something went wrong in failingFunction
+Stack Trace:
+  1. test.go:67 (main.testBasicErrorHandling)
+  2. test.go:26 (main.main)
+  3. proc.go:283 (runtime.main)
+  4. asm_arm64.s:1223 (runtime.goexit)
+[2025-05-23 00:57:56] ERROR in test.go:73 (main.testBasicErrorHandling): open /nonexistent/path/file.txt: no such file or directory
+Stack Trace:
+  1. test.go:73 (main.testBasicErrorHandling)
+  2. test.go:26 (main.main)
+  3. proc.go:283 (runtime.main)
+  4. asm_arm64.s:1223 (runtime.goexit)
+[2025-05-23 00:57:56] ERROR in test.go:89 (main.testContextualErrors): user 12345 not found in database
+Context:
+  client_ip: 192.168.1.100
+  user_id: 12345
+  operation: user_profile_update
+  timestamp: 1747976276
+Stack Trace:
+  1. test.go:89 (main.testContextualErrors)
+  2. test.go:29 (main.main)
+  3. proc.go:283 (runtime.main)
+  4. asm_arm64.s:1223 (runtime.goexit)
+[2025-05-23 00:57:56] ERROR in test.go:102 (main.testCustomFormatting): failed to load configuration file 'config.json' for user 999: invalid JSON format
+Stack Trace:
+  1. test.go:102 (main.testCustomFormatting)
+  2. test.go:32 (main.main)
+  3. proc.go:283 (runtime.main)
+  4. asm_arm64.s:1223 (runtime.goexit)
+[2025-05-23 00:57:56] ERROR in test.go:138 (main.testAssertions): assertion failed: slice should not be empty, got length 0
+Stack Trace:
+  1. test.go:138 (main.testAssertions)
+  2. test.go:38 (main.main)
+  3. proc.go:283 (runtime.main)
+  4. asm_arm64.s:1223 (runtime.goexit)
+[2025-05-23 00:57:56] ERROR in test.go:171 (main.testTryDefer): operation failed in deferred function
+Stack Trace:
+  1. test.go:171 (main.testTryDefer)
+  2. test.go:47 (main.main)
+  3. proc.go:283 (runtime.main)
+  4. asm_arm64.s:1223 (runtime.goexit)
+[2025-05-23 00:57:56] ERROR in test.go:187 (main.testCheckFunction): something went wrong in failingFunction
+Stack Trace:
+  1. test.go:187 (main.testCheckFunction)
+  2. test.go:50 (main.main)
+  3. proc.go:283 (runtime.main)
+  4. asm_arm64.s:1223 (runtime.goexit)
+[2025-05-23 00:57:56] ERROR in test.go:201 (main.testFileOperations): open nonexistent_file.txt: no such file or directory
+Context:
+  filename: nonexistent_file.txt
+  operation: file_open
+Stack Trace:
+  1. test.go:201 (main.testFileOperations)
+  2. test.go:53 (main.main)
+  3. proc.go:283 (runtime.main)
+  4. asm_arm64.s:1223 (runtime.goexit)
