@@ -1,12 +1,12 @@
 package main
 
 import (
-	"except"
+	"catch"
 	"fmt"
 	"os"
 )
 
-// var Err = except.X
+// var Err = catch.X
 
 func main() {
 	testFile1()
@@ -32,7 +32,7 @@ func testFile2() {
 	// Try to open non-existent file
 	filename := "nonexistent_file.txt"
 	file, err := os.Open(filename)
-	except.Err(err, filename)
+	catch.Err(err, filename)
 
 	if file != nil {
 		file.Close()

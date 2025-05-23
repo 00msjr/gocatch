@@ -1,4 +1,4 @@
-package except
+package catch
 
 import (
 	"bufio"
@@ -854,7 +854,7 @@ func Recover() func(*error) {
 
 // Xf formats and handles error with context
 // Usage: except.Xf(err, "failed to process %s", filename)
-func Xf(err error, format string, args ...interface{}) error {
+func Errf(err error, format string, args ...interface{}) error {
 	if err == nil {
 		return nil
 	}
@@ -865,7 +865,7 @@ func Xf(err error, format string, args ...interface{}) error {
 
 // XMust panics with smart error info if err is not nil
 // Usage: file := except.XMust(os.Open(filename))
-func XMust[T any](val T, err error) T {
+func ErrMust[T any](val T, err error) T {
 	if err != nil {
 		Err(err) // This will exit due to default config
 	}
@@ -874,7 +874,7 @@ func XMust[T any](val T, err error) T {
 
 // XCheck returns false and handles error if not nil
 // Usage: if !except.XCheck(err) { return }
-func XCheck(err error) bool {
+func ErrCheck(err error) bool {
 	if err != nil {
 		Err(err)
 		return false
