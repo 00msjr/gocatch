@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"except" // Adjust import path as needed
+	"catch" // Adjust import path as needed
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	fmt.Println("====================================")
 
 	// Configure error handling for non-fatal testing
-	except.Catch.Configure(except.ErrorConfig{
+	catch.Catch.Configure(catch.ErrorConfig{
 		ShowStackTrace: true,
 		ExitOnError:    false, // Set to true to see fatal behavior
 		LogToFile:      "test_errors.log",
@@ -58,18 +58,18 @@ func main() {
 func testBasicErrorHandling() {
 	fmt.Println("  • Testing successful operation...")
 	err := workingFunction()
-	except.E(err) // Should pass silently
+	catch.E(err) // Should pass silently
 	fmt.Println("    ✓ Working function completed")
 
 	fmt.Println("  • Testing failing operation...")
 	err = failingFunction()
-	except.E(err) // Will log error but not exit (ExitOnError: false)
+	catch.E(err) // Will log error but not exit (ExitOnError: false)
 	fmt.Println("    ✓ Error handled and logged")
 
 	// Test Catch.Set()
 	fmt.Println("  • Testing Catch.Set()...")
 	_, err = brokenFileOpen()
-	except.Catch.Set(err) // Alternative syntax
+	catch.Catch.Set(err) // Alternative syntax
 	fmt.Println("    ✓ Catch.Set() handled error")
 }
 
@@ -81,7 +81,7 @@ func testContextualErrors() {
 	operation := "user_profile_update"
 
 	err := simulateUserError(userID)
-	except.Catch.WithContext("user_id", userID).
+	catch.Catch.WithContext("user_id", userID).
 		WithContext("operation", operation).
 		WithContext("timestamp", time.Now().Unix()).
 		WithContext("client_ip", "192.168.1.100").
@@ -98,7 +98,7 @@ func testCustomFormatting() {
 	userID := 999
 
 	err := simulateConfigError()
-	except.F(err, "failed to load configuration file '%s' for user %d", filename, userID)
+	catch.F(err, "failed to load configuration file '%s' for user %d", filename, userID)
 
 	fmt.Println("    ✓ Custom formatted error handled")
 }
@@ -108,7 +108,7 @@ func testMustFunction() {
 	fmt.Println("  • Testing Must() with working function...")
 
 	// This will work
-	result := except.Must(workingIntFunction())
+	result := catch.Must(workingIntFunction())
 	fmt.Printf("    ✓ Must() succeeded with result: %d\n", result)
 
 	fmt.Println("  • Testing Must() with failing function...")
@@ -121,7 +121,7 @@ func testMustFunction() {
 	}()
 
 	// This will panic
-	_ = except.Must(failingIntFunction())
+	_ = catch.Must(failingIntFunction())
 	fmt.Println("    ❌ This line should not be reached")
 }
 
@@ -129,12 +129,12 @@ func testMustFunction() {
 func testAssertions() {
 	fmt.Println("  • Testing successful assertion...")
 	slice := []int{1, 2, 3}
-	except.Assert(len(slice) > 0, "slice should not be empty")
+	catch.Assert(len(slice) > 0, "slice should not be empty")
 	fmt.Println("    ✓ Assertion passed")
 
 	fmt.Println("  • Testing failing assertion...")
 	emptySlice := []int{}
-	except.Assert(len(emptySlice) > 0, "slice should not be empty, got length %d", len(emptySlice))
+	catch.Assert(len(emptySlice) > 0, "slice should not be empty, got length %d", len(emptySlice))
 	fmt.Println("    ✓ Assertion failure handled")
 }
 
@@ -153,7 +153,7 @@ func testPanicRecovery() {
 	fmt.Println("  • Testing panic recovery...")
 
 	var err error
-	defer except.Recover()(&err)
+	defer catch.Recover()(&err)
 
 	// This will panic
 	panicFunction()
@@ -178,12 +178,12 @@ func testCheckFunction() {
 	fmt.Println("  • Testing Check() function...")
 
 	err := workingFunction()
-	if except.Check(err) {
+	if catch.Check(err) {
 		fmt.Println("    ✓ Check() returned true for nil error")
 	}
 
 	err = failingFunction()
-	if !except.Check(err) {
+	if !catch.Check(err) {
 		fmt.Println("    ✓ Check() returned false and handled error")
 	}
 }
@@ -195,7 +195,7 @@ func testFileOperations() {
 	// Try to open non-existent file
 	filename := "nonexistent_file.txt"
 	file, err := os.Open(filename)
-	except.Catch.WithContext("filename", filename).
+	catch.Catch.WithContext("filename", filename).
 		WithContext("operation", "file_open").
 		Set(err)
 
@@ -243,7 +243,7 @@ func simulateConfigError() error {
 func processUserData(userID int) error {
 	err := fetchUserFromDB(userID)
 	if err != nil {
-		return except.Wrap(err, "failed to process user data for user %d", userID)
+		return catch.Wrap(err, "failed to process user data for user %d", userID)
 	}
 	return nil
 }
@@ -261,7 +261,7 @@ func panicFunction() {
 
 func operationWithDefer() error {
 	var err error
-	defer except.Try()(&err)
+	defer catch.Try()(&err)
 
 	// Simulate an operation that might fail
 	err = errors.New("operation failed in deferred function")
@@ -288,7 +288,7 @@ HOW TO TEST DIFFERENT ERROR SCENARIOS:
 
    func testNetworkError() {
        resp, err := http.Get("http://invalid-domain-12345.com")
-       except.F(err, "failed to fetch data from %s", "invalid-domain-12345.com")
+       catch.F(err, "failed to fetch data from %s", "invalid-domain-12345.com")
        if resp != nil {
            resp.Body.Close()
        }
@@ -303,7 +303,7 @@ HOW TO TEST DIFFERENT ERROR SCENARIOS:
        invalidJSON := `{"name": "test", "age":}`
        var data map[string]interface{}
        err := json.Unmarshal([]byte(invalidJSON), &data)
-       except.F(err, "failed to parse JSON data")
+       catch.F(err, "failed to parse JSON data")
    }
    ```
 
@@ -311,7 +311,7 @@ HOW TO TEST DIFFERENT ERROR SCENARIOS:
    ```go
    func testConversionError() {
        _, err := strconv.Atoi("not-a-number")
-       except.F(err, "failed to convert string to integer")
+       catch.F(err, "failed to convert string to integer")
    }
    ```
 
@@ -319,7 +319,7 @@ HOW TO TEST DIFFERENT ERROR SCENARIOS:
    ```go
    func testCustomError() {
        err := fmt.Errorf("custom error: %w", errors.New("underlying cause"))
-       except.Catch.WithContext("error_type", "custom").Set(err)
+       catch.Catch.WithContext("error_type", "custom").Set(err)
    }
    ```
 
@@ -335,7 +335,7 @@ HOW TO TEST DIFFERENT ERROR SCENARIOS:
        for i := 0; i < 10; i++ {
            go func(id int) {
                err := fmt.Errorf("goroutine %d error", id)
-               except.Catch.WithContext("goroutine_id", id).Set(err)
+               catch.Catch.WithContext("goroutine_id", id).Set(err)
            }(i)
        }
        time.Sleep(100 * time.Millisecond)

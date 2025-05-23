@@ -1,20 +1,20 @@
-# except - Go Error Handling Simplified
+# catch - Go Error Handling Simplified
 
 A lightweight Go module that makes error handling more concise.
 
 ## Description
 
-The `except` module is a simple utility that transforms the standard Go error handling pattern into a more concise syntax. It allows you to replace verbose error checking blocks with a single function call, making your code cleaner and more readable while still maintaining proper error handling.
+The `catch` module is a simple utility that transforms the standard Go error handling pattern into a more concise syntax. It allows you to replace verbose error checking blocks with a single function call, making your code cleaner and more readable while still maintaining proper error handling.
 
 ## Installation
 
 ```bash
-go get github.com/00msjr/except
+go get github.com/00msjr/catch
 ```
 
 ## Usage
 
-The `except` module provides several ways to simplify error handling in Go:
+The `catch` module provides several ways to simplify error handling in Go:
 
 ### 1. The E Function (Most Concise)
 
@@ -26,23 +26,23 @@ if err != nil {
     return
 }
 
-// With except module:
+// With catch module:
 file, err := os.Open(filePath)
-except.Err(err) // Single line error handling
+catch.Err(err) // Single line error handling
 ```
 
 ### 2. Using the Global Catch Variable
 
 ```go
 file, err := os.Open(filePath)
-except.Catch.Set(err) // Handles the error if it's not nil
+catch.Catch.Set(err) // Handles the error if it's not nil
 ```
 
 ### 3. Using a Short Alias for Ultra-Concise Syntax
 
 ```go
 // Create a short alias at the beginning of your function or file
-e := except.Err
+e := catch.Err
 
 // Then use it for ultra-concise error handling
 file, err := os.Open(filePath)
@@ -53,13 +53,13 @@ e(err) // Ultra concise error handling
 
 ```go
 file, err := os.Open(filePath)
-except.F(err, "failed to open %s", filePath) // With custom message
+catch.F(err, "failed to open %s", filePath) // With custom message
 ```
 
 ### 5. The Must Function (For One-liners)
 
 ```go
-file := except.Must(os.Open(filePath)) // Returns the value if no error
+file := catch.Must(os.Open(filePath)) // Returns the value if no error
 ```
 
 ### 6. The Try Function (With Defer)
@@ -67,7 +67,7 @@ file := except.Must(os.Open(filePath)) // Returns the value if no error
 ```go
 func readFile(filePath string) {
     var err error
-    defer except.Try()(&err) // Will check err at the end of function
+    defer catch.Try()(&err) // Will check err at the end of function
 
     file, err := os.Open(filePath)
     if err != nil {
@@ -85,7 +85,7 @@ All error handling functions in the module will:
 
 1. Check if the error is not nil
 2. If an error exists, print the error with file and line information
-3. Exit the program with status code 1 (except for `Must` which panics)
+3. Exit the program with status code 1 (catch for `Must` which panics)
 
 This approach is particularly useful for scripts, tools, and applications where you want to fail fast and provide clear error messages.
 

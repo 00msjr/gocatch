@@ -1,2 +1,0 @@
-X make it functional as except.Err, make sure this doesnt cause any probs
-do ErrB for error backtrace option?
