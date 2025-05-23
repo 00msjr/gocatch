@@ -9,7 +9,7 @@ The `except` module is a simple utility that transforms the standard Go error ha
 ## Installation
 
 ```bash
-go get github.com/soup-ms/except
+go get github.com/00msjr/except
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ if err != nil {
 
 // With except module:
 file, err := os.Open(filePath)
-except.E(err) // Single line error handling
+except.Err(err) // Single line error handling
 ```
 
 ### 2. Using the Global Catch Variable
@@ -42,7 +42,7 @@ except.Catch.Set(err) // Handles the error if it's not nil
 
 ```go
 // Create a short alias at the beginning of your function or file
-e := except.E
+e := except.Err
 
 // Then use it for ultra-concise error handling
 file, err := os.Open(filePath)
@@ -91,7 +91,7 @@ This approach is particularly useful for scripts, tools, and applications where 
 
 ## Authors
 
-[@soup-ms](https://github.com/soup-ms)
+[@00msjr](https://github.com/soup-ms)
 
 ## Version History
 
